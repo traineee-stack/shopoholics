@@ -8,6 +8,8 @@ public class ShopoholicsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ShopoholicsApplication.class, args);
+		int var=2;
+
 	}
 
 }
