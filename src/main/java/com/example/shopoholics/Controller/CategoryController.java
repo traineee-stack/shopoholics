@@ -3,6 +3,8 @@ package com.example.shopoholics.Controller;
 import com.example.shopoholics.Entity.Category;
 import com.example.shopoholics.Services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,11 +27,14 @@ public class CategoryController {
     @PostMapping("/one")
     public Category createCategory(@RequestBody Category category){
 
-        System.out.println("Received Category: " + category);
+       // System.out.println("Received Category: " + category);
         return categoryService.saveCategory(category);
+
     }
 
-    @PostMapping("/many")
+
+
+        @PostMapping("/many")
     public List<Category> createAllCategory( @RequestBody List<Category> categories){
         return categoryService.saveAllCategory(categories);
     }
