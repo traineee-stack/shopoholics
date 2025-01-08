@@ -2,7 +2,6 @@ package com.example.shopoholics.Services;
 
 import com.example.shopoholics.Entity.Category;
 import com.example.shopoholics.Repository.CategoryRepo;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
 public class CategoryService {
 
     @Autowired

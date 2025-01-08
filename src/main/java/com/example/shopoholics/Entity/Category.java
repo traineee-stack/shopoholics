@@ -1,10 +1,13 @@
 package com.example.shopoholics.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 //import org.springframework.data.annotation.Id;
 
 //@AllArgsConstructor
@@ -14,6 +17,10 @@ import lombok.Setter;
 
 @Entity
 public class Category {
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "category")
+    private List<Product> productList;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
