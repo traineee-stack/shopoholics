@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.shopoholics.Entity.User;
+import com.example.shopoholics.Exception.ResourceNotFoundException;
 import com.example.shopoholics.Services.UserService;
 
 @RestController
@@ -35,8 +39,10 @@ public class UserContoller {
 	    }
 
 	    @GetMapping("/{id}")
-	    public Optional<User> showUserById(@PathVariable long id){
-	        return userService.showUserById(id);
+	    public ResponseEntity<Optional<User>> getUserById(@PathVariable long id) {
+	        // Call the service to fetch the user
+	        Optional<User> user = userService.showUserById(id);
+	        return ResponseEntity.ok(user);  // 200 OK with the user data
 	    }
 
 	    @GetMapping

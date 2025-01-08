@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.shopoholics.Entity.User;
+import com.example.shopoholics.Exception.ResourceNotFoundException;
 import com.example.shopoholics.Repository.UserRepository;
 
 @Service
@@ -23,10 +24,13 @@ public class UserService {
         return userRepo.saveAll(user);
     }
 
-    public Optional<User> showUserById(long id){
-        return userRepo.findById(id);
+    public Optional<User> showUserById(long id) {
+        Optional<User> user = userRepo.findById(id);
+        if (user.isEmpty()) {
+            throw new ResourceNotFoundException("User not found with id: " + id);
+        }
+        return user;
     }
-    
     
 
     public List<User> showAllUser(){
