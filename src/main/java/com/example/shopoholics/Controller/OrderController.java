@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.shopoholics.Entity.Order;
+import com.example.shopoholics.Entity.Orders;
 import com.example.shopoholics.Entity.User;
 import com.example.shopoholics.Services.OrderService;
 
@@ -25,26 +25,26 @@ public class OrderController {
 	OrderService orderService;
 	
 	 @PostMapping("/one")
-	    public Order createOrder(@RequestBody Order order){
+	    public Orders createOrder(@RequestBody Orders order){
 
 	       
 	        return orderService.saveOrder(order);
 	    }
 
 	    @PostMapping("/many")
-	    public List<Order> createAllOrder( @RequestBody List<Order> orders){
+	    public List<Orders> createAllOrder( @RequestBody List<Orders> orders){
 	        return orderService.saveAllOrder(orders);
 	    }
 
 	    @GetMapping("/{id}")
-	    public ResponseEntity<Optional<Order>> getOrderById(@PathVariable long id) {
+	    public ResponseEntity<Optional<Orders>> getOrderById(@PathVariable long id) {
 	        // Call the service to fetch the user
-	        Optional<Order> order = orderService.showUOrderById(id);
+	        Optional<Orders> order = orderService.showUOrderById(id);
 	        return ResponseEntity.ok(order);  // 200 OK with the user data
 	    }
 
 	    @GetMapping
-	    public List<Order> showAllCategory(){
+	    public List<Orders> showAllCategory(){
 	        return orderService.showAllOrder();
 	    }
 

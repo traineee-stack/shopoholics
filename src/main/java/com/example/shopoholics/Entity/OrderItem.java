@@ -13,7 +13,6 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 public class OrderItem {
-	
 	    @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
@@ -21,7 +20,7 @@ public class OrderItem {
 	    @JsonBackReference
 	    @ManyToOne
 	    @JoinColumn(name = "order_id")
-	    private Order order;
+	    private Orders order;
 	    
 	    @JsonBackReference
 	    @ManyToOne
@@ -36,10 +35,10 @@ public class OrderItem {
 		public void setId(Long id) {
 			this.id = id;
 		}
-		public Order getOrder() {
+		public Orders getOrder() {
 			return order;
 		}
-		public void setOrder(Order order) {
+		public void setOrder(Orders order) {
 			this.order = order;
 		}
 		public Product getProduct() {
@@ -60,7 +59,7 @@ public class OrderItem {
 		public void setPrice(BigDecimal price) {
 			this.price = price;
 		}
-		public OrderItem(Long id, Order order, Product product, int quantity, BigDecimal price) {
+		public OrderItem(Long id, Orders order, Product product, int quantity, BigDecimal price) {
 			super();
 			this.id = id;
 			this.order = order;
@@ -69,11 +68,11 @@ public class OrderItem {
 			this.price = price;
 		}
 		public OrderItem() {
-			super();
+			
 		}
 		
 		
 	    
 	    
-}
 
+}

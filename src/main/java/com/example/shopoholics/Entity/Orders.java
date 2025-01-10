@@ -13,7 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Order {
+public class Orders {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,12 +29,12 @@ public class Order {
     private String status;
     private String paymentStatus;
     
-    @JsonBackReference
+    @JsonBackReference("shipping-address")
     @ManyToOne
     @JoinColumn(name = "shipping_address_id")
     private Address shippingAddress;  // Relationship to Address entity
     
-    @JsonBackReference
+    @JsonBackReference("billing-address")
     @ManyToOne
     @JoinColumn(name = "billing_address_id")
     private Address billingAddress;  // Relationship to Address entity
@@ -42,6 +42,8 @@ public class Order {
 	public Long getId() {
 		return id;
 	}
+	
+	//hvh
 
 	public void setId(Long id) {
 		this.id = id;
@@ -103,7 +105,7 @@ public class Order {
 		this.billingAddress = billingAddress;
 	}
 
-	public Order(Long id, User user, LocalDateTime orderDate, BigDecimal totalPrice, String status,
+	public Orders(Long id, User user, LocalDateTime orderDate, BigDecimal totalPrice, String status,
 			String paymentStatus, Address shippingAddress, Address billingAddress) {
 		super();
 		this.id = id;
@@ -116,7 +118,7 @@ public class Order {
 		this.billingAddress = billingAddress;
 	}
 
-	public Order() {
+	public Orders() {
 		
 	}
     

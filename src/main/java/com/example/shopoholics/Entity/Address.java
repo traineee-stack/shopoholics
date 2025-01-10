@@ -1,5 +1,7 @@
 package com.example.shopoholics.Entity;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -10,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Address {
@@ -30,9 +33,35 @@ public class Address {
     private String country;
     
     private String type; // 'shipping' or 'billing'
+    
+    @OneToMany(mappedBy = "shippingAddress")  // Mapping to Orders where this address is used as shipping
+    @JsonManagedReference // Avoid infinite recursion in serialization
+    private List<Orders> shippingOrders;
+
+    @OneToMany(mappedBy = "billingAddress")  // Mapping to Orders where this address is used as billing
+    @JsonManagedReference  // Avoid infinite recursion in serialization
+    private List<Orders> billingOrders;
 
 	public Long getId() {
 		return id;
+	}
+
+	
+
+	public List<Orders> getShippingOrders() {
+		return shippingOrders;
+	}
+
+	public void setShippingOrders(List<Orders> shippingOrders) {
+		this.shippingOrders = shippingOrders;
+	}
+
+	public List<Orders> getBillingOrders() {
+		return billingOrders;
+	}
+
+	public void setBillingOrders(List<Orders> billingOrders) {
+		this.billingOrders = billingOrders;
 	}
 
 	public void setId(Long id) {
@@ -95,8 +124,10 @@ public class Address {
 		this.type = type;
 	}
 
+	
+
 	public Address(Long id, User user, String street, String city, String state, String postalCode, String country,
-			String type) {
+			String type, List<Orders> shippingOrders, List<Orders> billingOrders) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -106,7 +137,11 @@ public class Address {
 		this.postalCode = postalCode;
 		this.country = country;
 		this.type = type;
+		this.shippingOrders = shippingOrders;
+		this.billingOrders = billingOrders;
 	}
+
+
 
 	public Address() {
 		super();

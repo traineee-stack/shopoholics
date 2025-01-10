@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.shopoholics.Entity.Order;
+import com.example.shopoholics.Entity.Orders;
 import com.example.shopoholics.Entity.User;
 import com.example.shopoholics.Exception.ResourceNotFoundException;
 import com.example.shopoholics.Repository.OrderRepository;
@@ -18,16 +18,16 @@ public class OrderService {
 	@Autowired
     private OrderRepository orderRepository;
 
-    public Order saveOrder(Order order){
+    public Orders saveOrder(Orders order){
         return orderRepository.save(order);
     }
 
-    public List<Order> saveAllOrder(List<Order> order){
+    public List<Orders> saveAllOrder(List<Orders> order){
         return orderRepository.saveAll(order);
     }
 
-    public Optional<Order> showUOrderById(long id) {
-        Optional<Order> order = orderRepository.findById(id);
+    public Optional<Orders> showUOrderById(long id) {
+        Optional<Orders> order = orderRepository.findById(id);
         if (order.isEmpty()) {
             throw new ResourceNotFoundException("User not found with id: " + id);
         }
@@ -35,7 +35,7 @@ public class OrderService {
     }
     
 
-    public List<Order> showAllOrder(){
+    public List<Orders> showAllOrder(){
         return orderRepository.findAll();
     }
 
